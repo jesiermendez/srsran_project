@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 MIS_APLICACIONES = [
-
+    'api',
 ]
 
 APLICACIONES_DEL_SISTEMA = [
@@ -43,11 +43,12 @@ APLICACIONES_DEL_SISTEMA = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 APLICACIONES_DE_TERCEROS = [
     'rest_framework',
 ]
 
-INSTALLED_APPS = MIS_APLICACIONES + APLICACIONES_DE_TERCEROS + APLICACIONES_DEL_SISTEMA
+INSTALLED_APPS = APLICACIONES_DEL_SISTEMA + MIS_APLICACIONES + APLICACIONES_DE_TERCEROS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -135,7 +136,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-AUTH_USER_MODEL = 'autentication_app.CustomUser'
+#AUTH_USER_MODEL = 'autentication_app.CustomUser'
 
 MEDIA_URL = '/media/'
 
