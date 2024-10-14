@@ -1,10 +1,347 @@
 {% extends "base.html" %}
-<head>
-    {% block title %} Settings {% endblock %}   
-</head>
+{% block title %}Settings{% endblock %}  
 
 {% block content %}
+
+<header class="bg-primary text-white text-center py-3">
+    <h1>Configuración</h1>
+</header>
+<main class="container mt-5">
+    <div class="row">
+        
+        <nav class="col-md-3">
+            <ul class="nav flex-column nav-pills" id="configMenu">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" data-target="#config1">Configuración 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config2">Configuración 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config3">Configuración 3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config4">Configuración 4</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config5">Configuración 5</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config6">Configuración 6</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config7">Configuración 7</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config8">Configuración 8</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config9">Configuración 9</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config10">Configuración 10</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config11">Configuración 11</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-target="#config12">Configuración 12</a>
+                </li>
+            </ul>
+        </nav>
     
-pagina principal
+        <section class="col-md-9">
+            <div id="config1" class="content active">
+                <h2>Configuración 1</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input1">Campo 1</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input2">Campo 2</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input3">Campo 3</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input4">Campo 4</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config2" class="content">
+                <h2>Configuración 2</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input5">Campo 5</label>
+                            <input type="text" class="form-control" id="input3" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input6">Campo 6</label>
+                            <input type="text" class="form-control" id="input4" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input7">Campo 7</label>
+                            <input type="text" class="form-control" id="input4" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input8">Campo 8</label>
+                            <input type="text" class="form-control" id="input4" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config3" class="content">
+                <h2>Configuración 3</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input9">Campo 9</label>
+                            <input type="text" class="form-control" id="input5" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input10">Campo 10</label>
+                            <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input11">Campo 11</label>
+                            <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input12">Campo 12</label>
+                            <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config4" class="content">
+                <h2>Configuración 4</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input13">Campo 13</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input14">Campo 14</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input15">Campo 15</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input16">Campo 16</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config5" class="content">
+                <h2>Configuración 5</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input17">Campo 17</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input18">Campo 18</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input19">Campo 19</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input20">Campo 20</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config6" class="content">
+                <h2>Configuración 6</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input21">Campo 21</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input22">Campo 22</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input23">Campo 23</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input24">Campo 24</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config7" class="content">
+                <h2>Configuración 7</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input25">Campo 25</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input26">Campo 26</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input27">Campo 27</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input28">Campo 28</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config8" class="content">
+                <h2>Configuración 8</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input29">Campo 29</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input30">Campo 30</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input31">Campo 31</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input32">Campo 32</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config9" class="content">
+                <h2>Configuración 9</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input33">Campo 33</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input34">Campo 34</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input35">Campo 35</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input36">Campo 36</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config10" class="content">
+                <h2>Configuración 10</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input37">Campo 37</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input38">Campo 38</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input39">Campo 39</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input40">Campo 40</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config11" class="content">
+                <h2>Configuración 11</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input41">Campo 41</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input42">Campo 42</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input43">Campo 43</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input44">Campo 44</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            <div id="config12" class="content">
+                <h2>Configuración 12</h2>
+                <div class="form-container">
+                    <form>
+                        <div class="form-group">
+                            <label for="input45">Campo 45</label>
+                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input46">Campo 46</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input47">Campo 47</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <div class="form-group">
+                            <label for="input48">Campo 48</label>
+                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+</main>
 
 {% endblock %}

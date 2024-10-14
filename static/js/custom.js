@@ -12,3 +12,13 @@
                 }
             });
         }    
+
+        $(document).ready(function() {
+            $('#configMenu a').on('click', function(e) {
+                e.preventDefault();
+                $('#configMenu a').removeClass('active');
+                $(this).addClass('active');
+                $('.content').removeClass('active');
+                $($(this).data('target')).addClass('active');
+            });
+        });
