@@ -10,3 +10,4 @@ srsran/__pycache__/urls.cpython-312.pyc
 srsran/__pycache__/wsgi.cpython-312.pyc
 api/migrations/
 api/__pycache__/views.cpython-312.pyc
+srsran/__pycache__/settings.cpython-312.pyc
