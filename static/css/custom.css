@@ -1,5 +1,33 @@
 body {
     font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.cuadro {
+    border: 2px solid #36bbf0;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    width: fit-content;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.cuadro-formulario {
+    border: 2px solid #36bbf0;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    width: 550px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.form-container {
+    max-width: 600px;
+}
+.form-actions {
+    text-align: right;
 }
 .content {
     display: none;
@@ -7,20 +35,27 @@ body {
 .content.active {
     display: block;
 }
+.content-wrapper {
+    flex: 1;
+}
+nav {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
 .nav-pills .nav-link {
-    border-radius: 0;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 15px;
     margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+.nav-link:hover {
+    color: #f8f9fa;
+    background-color: #0056b3;
 }
 .nav-pills .nav-link.active {
     background-color: #007bff;
-}
-.form-container {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    max-width: 600px;
-    margin: 0 auto;
 }
 .form-group label {
     font-weight: bold;
@@ -28,7 +63,56 @@ body {
 .form-control {
     margin-bottom: 10px;
 }
+.form-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.5em;
+    color: #007bff;
+    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+.form-title:hover {
+    transform: scale(1.05);
+}
+.form-title1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em;
+    color: rgb(44, 21, 21);
+    text-align: center;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);    
+    margin: 0;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
 .btn-primary {
     background-color: #007bff;
-    border-color: #007bff;
+    border-color: #2e445c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #073566;
+    transform: scale(1.05);
+}
+.footer {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
 }
