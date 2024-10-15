@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Start{% endblock %}
+<style>
+body, html {
+    height: 100%;
+    }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.form-container {
+    max-width: 400px;
+    width: 100%;
+}
+</style>
+
+{% block content %}
+<header class="bg-primary text-white text-center py-3">
+    <h1 class="form-title1">Autenticación</h1>
+</header>
+<br>
+<br>
+<main>
+    <div class="content-wrapper cuadro">
+        <div class="form-container bg-light p-4 rounded shadow-sm">
+            <h2 class="text-primary mb-4 text-center form-title">Iniciar Sesión</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group form-control">
+                    {{ form.as_p }}
+                </div>                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Iniciar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

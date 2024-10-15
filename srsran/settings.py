@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 MIS_APLICACIONES = [
     'api',
+    'autentication_app',
 ]
 
 APLICACIONES_DEL_SISTEMA = [
@@ -136,7 +137,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-#AUTH_USER_MODEL = 'autentication_app.CustomUser'
+AUTH_USER_MODEL = 'autentication_app.CustomUser'
 
 MEDIA_URL = '/media/'
 
