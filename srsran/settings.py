@@ -47,6 +47,7 @@ APLICACIONES_DEL_SISTEMA = [
 
 APLICACIONES_DE_TERCEROS = [
     'rest_framework',
+    
 ]
 
 INSTALLED_APPS = APLICACIONES_DEL_SISTEMA + MIS_APLICACIONES + APLICACIONES_DE_TERCEROS
@@ -147,3 +148,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}

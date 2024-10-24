@@ -18,19 +18,24 @@ body, html {
 </style>
 
 {% block content %}
-<header class="bg-primary text-white text-center py-3">
+<header class="bg-estilo text-center py-3">
     <h1 class="form-title1">Autenticación</h1>
 </header>
 <br>
 <br>
 <main>
-    <div class="content-wrapper cuadro">
-        <div class="form-container bg-light p-4 rounded shadow-sm">
+    <div class="content-wrapper cuadro-formulario">
+        <div class="form-container  p-4 rounded shadow-sm">
             <h2 class="text-primary mb-4 text-center form-title">Iniciar Sesión</h2>
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" class="form-group form-control" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="form-group form-control">
+                <div >
                     {{ form.as_p }}
+                    {% if form1.errors %}
+                        <div class="mensaje-error">
+                            {{ form1.errors }}
+                        </div>
+                    {% endif %}
                 </div>                
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Iniciar</button>

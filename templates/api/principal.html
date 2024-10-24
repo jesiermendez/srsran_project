@@ -1,110 +1,232 @@
 {% extends "base.html" %}
-{% block title %}Settings{% endblock %}  
+{% block title %}Ajustes{% endblock %}  
 
 {% block content %}
 
-<header class="bg-primary text-white text-center py-3">
-    <h1 class="form-title1">Configuración</h1>
+<header class="bg-estilo text-center py-3">
+        <h1 class="form-title1">Ajustes</h1>
 </header>
+
 <main class="container mt-5">
     <div class="row">
         <nav class="col-md-3 cuadro">
             <ul class="nav flex-column nav-pills" id="configMenu">
+                <div>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#" data-target="#config1">Configuración 1</a>
+                    <a class="nav-link" href="#" data-target="#config1">eNB</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config2">Configuración 2</a>
+                    <a class="nav-link" href="#" data-target="#config2">Enb Files</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config3">Configuración 3</a>
+                    <a class="nav-link" href="#" data-target="#config3">Rf</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config4">Configuración 4</a>
+                    <a class="nav-link" href="#" data-target="#config4">Pcap</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config5">Configuración 5</a>
+                    <a class="nav-link" href="#" data-target="#config5">Log</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config6">Configuración 6</a>
+                    <a class="nav-link" href="#" data-target="#config6">Scheduler</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config7">Configuración 7</a>
+                    <a class="nav-link" href="#" data-target="#config7">Slicin</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config8">Configuración 8</a>
+                    <a class="nav-link" href="#" data-target="#config8">Embms</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config9">Configuración 9</a>
+                    <a class="nav-link" href="#" data-target="#config9">Channel dl</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config10">Configuración 10</a>
+                    <a class="nav-link" href="#" data-target="#config10">Cfr</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config11">Configuración 11</a>
+                    <a class="nav-link" href="#" data-target="#config11">E2 agent</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-target="#config12">Configuración 12</a>
+                    <a class="nav-link" href="#" data-target="#config12">Expert</a>
                 </li>
+            </div>
+                <br>
+                <li class="nav-item">
+                    <a class="logout" href="{% url 'logout' %}" style="text-align: right;">Cerrar sección,{{user.username}}</a>
+                </li>                
             </ul>
-        </nav>
-    
-        <section class="col-md-9">
-            <div id="config1" class="content active">                
-                <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 1</h2>
+        </nav> 
+                   
+        <div class="col-md-9">  
+            <section id="config1" class="content">                          
+                <div class="form-container cuadro-formulario">                    
+                    <h2 class="form-title">Ajustes de eNB</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input1">Campo 1</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
+                        {% if mensaje1 %}
+                            <p class="mensaje-exito">
+                                {{ mensaje1 }}
+                            </p>
+                        {% endif %}                        
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">                            
+                            <label for="{{ form1.enb_id.id_for_label }}">{{ form1.enb_id.label }}</label>
+                            {{ form1.enb_id }}
+                            {% if form1.enb_id.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.enb_id.errors }}
+                                </div>
+                            {% endif %}
+                            {% if error1 %}
+                            <p class="mensaje-error">
+                                {{ error1 }}
+                            </p>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <label for="input2">Campo 2</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        <div class="form-group">                            
+                            <label for="{{ form1.mcc.id_for_label }}">{{ form1.mcc.label }}</label>
+                            {{ form1.mcc }}
+                            {% if form1.mcc.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.mcc.errors }}
+                                </div>
+                            {% endif %}
+                        </div> 
+                        <div class="form-group">                            
+                            <label for="{{ form1.mnc.id_for_label }}">{{ form1.mnc.label }}</label>
+                            {{ form1.mnc }}
+                            {% if form1.mnc.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.mnc.errors }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <label for="input3">Campo 3</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        <div class="form-group">                            
+                            <label for="{{ form1.mme_addr.id_for_label }}">{{ form1.mme_addr.label }}</label>
+                            {{ form1.mme_addr }}
+                            {% if form1.mme_addr.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.mme_addr.errors }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <label for="input4">Campo 4</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
+                        <div class="form-group">                            
+                            <label for="{{ form1.gtp_bind_addr.id_for_label }}">{{ form1.gtp_bind_addr.label }}</label>
+                            {{ form1.gtp_bind_addr }}
+                            {% if form1.gtp_bind_addr.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.gtp_bind_addr.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">                            
+                            <label for="{{ form1.gtp_advertise_addr.id_for_label }}">{{ form1.gtp_advertise_addr.label }}</label>
+                            {{ form1.gtp_advertise_addr }}
+                            {% if form1.gtp_advertise_addr.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.gtp_advertise_addr.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">                            
+                            <label for="{{ form1.s1c_bind_addr.id_for_label }}">{{ form1.s1c_bind_addr.label }}</label>
+                            {{ form1.s1c_bind_addr }}
+                            {% if form1.s1c_bind_addr.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.s1c_bind_addr.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">                            
+                            <label for="{{ form1.s1c_bind_port.id_for_label }}">{{ form1.s1c_bind_port.label }}</label>
+                            {{ form1.s1c_bind_port }}
+                            {% if form1.s1c_bind_port.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.s1c_bind_port.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">                            
+                            <label for="{{ form1.n_prb.id_for_label }}">{{ form1.n_prb.label }}</label>
+                            {{ form1.n_prb }}
+                            {% if form1.n_prb.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.n_prb.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">                            
+                            <label for="{{ form1.tm.id_for_label }}">{{ form1.tm.label }}</label>
+                            {{ form1.tm }}
+                            {% if form1.tm.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.tm.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="form-group">                            
+                            <label for="{{ form1.nof_ports.id_for_label }}">{{ form1.nof_ports.label }}</label>
+                            {{ form1.nof_ports }}
+                            {% if form1.nof_ports.errors %}
+                                <div class="mensaje-error">
+                                    {{ form1.nof_ports.errors }}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form1">Guardar</button>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config2" class="content">                
+            </section>
+
+            <section id="config2" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 2</h2>
+                    <h2 class="form-title">Ajustes de enb files</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input5">Campo 5</label>
-                            <input type="text" class="form-control" id="input3" placeholder="Ingrese valor">
+                    {% if mensaje2 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje2 }}
+                        </p>
+                    {% endif %} 
+                    <form method="post">                        
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+                        <div class="form-group">                            
+                            <label for="{{ form2.sib_config.id_for_label }}">{{ form2.sib_config.label }}</label>
+                            {{ form2.sib_config }}
+                            {% if form2.sib_config.errors %}
+                                <div class="mensaje-error">
+                                    {{ form2.sib_config.errors }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <label for="input6">Campo 6</label>
-                            <input type="text" class="form-control" id="input4" placeholder="Ingrese valor">
+                        <div class="form-group">                            
+                            <label for="{{ form2.rr_config.id_for_label }}">{{ form2.rr_config.label }}</label>
+                            {{ form2.rr_config }}
+                            {% if form2.rr_config.errors %}
+                                <div class="mensaje-error">
+                                    {{ form2.rr_config.errors }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <label for="input7">Campo 7</label>
-                            <input type="text" class="form-control" id="input4" placeholder="Ingrese valor">
+                        <div class="form-group">                            
+                            <label for="{{ form2.rb_config.id_for_label }}">{{ form2.rb_config.label }}</label>
+                            {{ form2.rb_config }}
+                            {% if form2.rb_config.errors %}
+                                <div class="mensaje-error">
+                                    {{ form2.rb_config.errors }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
-                            <label for="input8">Campo 8</label>
-                            <input type="text" class="form-control" id="input4" placeholder="Ingrese valor">
-                        </div>
+                        <br>                        
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form2">Guardar</button>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config3" class="content">                
+            </section>
+            <section id="config3" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 3</h2>
                     <br>
@@ -130,8 +252,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config4" class="content">                
+            </section>
+            <section id="config4" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 4</h2>
                     <br>
@@ -157,8 +279,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config5" class="content">                
+            </section>
+            <section id="config5" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 5</h2>
                     <br>
@@ -184,8 +306,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config6" class="content">                
+            </section>
+            <section id="config6" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 6</h2>
                     <br>
@@ -211,8 +333,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config7" class="content">                
+            </section>
+            <section id="config7" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 7</h2>
                     <br>
@@ -238,8 +360,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config8" class="content">                
+            </section>
+            <section id="config8" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 8</h2>
                     <br>
@@ -265,8 +387,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config9" class="content">                
+            </section>
+            <section id="config9" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 9</h2>
                     <br>
@@ -292,8 +414,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config10" class="content">                
+            </section>
+            <section id="config10" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 10</h2>
                     <br>
@@ -319,8 +441,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config11" class="content">                
+            </section>
+            <section id="config11" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 11</h2>
                     <br>
@@ -346,8 +468,8 @@
                         </div>
                     </form>
                 </div>
-            </div>
-            <div id="config12" class="content">                
+            </section>
+            <section id="config12" class="content">                
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 12</h2>
                     <br>
@@ -373,9 +495,9 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </section>
             
-        </section>
+        </div>
     </div>
 </main>
 
