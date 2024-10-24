@@ -1,7 +1,11 @@
 body {
+    
+
     font-family: Arial, sans-serif;
     height: 100%;
     margin: 0;
+    width: auto;
+    background-color: #90a19d;
     display: flex;
     flex-direction: column;
 }
@@ -9,19 +13,20 @@ body {
     border: 2px solid #36bbf0;
     border-radius: 10px;
     padding: 20px;
-    background-color: #f8f9fa;
     width: fit-content;
     margin: auto;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #e6e9f0e1;
+    
 }
 .cuadro-formulario {
     border: 2px solid #36bbf0;
     border-radius: 10px;
     padding: 20px;
-    background-color: #f8f9fa;
     width: 550px;
     margin: auto;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #e6e9f0e1;
 }
 .form-container {
     max-width: 600px;
