@@ -7,6 +7,7 @@ import subprocess
 from .serializers import *
 from.forms import *
 from .models import *
+from .scripts import *
 
 # Create your views here.
 
@@ -71,11 +72,11 @@ def api_view(request):
 
     try:
         last_enodeb = enodeb.objects.latest('id')
-        initial_data_enodeb = {'enb_id': last_enodeb.get_enb_id,'mcc': last_enodeb.mcc, 'mnc':last_enodeb.mnc, 
+        initial_data_enodeb = {'enb_id': last_enodeb.get_enb_id, 'name': last_enodeb.name,'mcc': last_enodeb.mcc, 'mnc':last_enodeb.mnc, 
                                'mme_addr': last_enodeb.mme_addr, 'gtp_bind_addr':last_enodeb.gtp_bind_addr, 
                                'gtp_advertise_addr':last_enodeb.gtp_advertise_addr, 's1c_bind_addr':last_enodeb.s1c_bind_addr,
                                 's1c_bind_port': last_enodeb.s1c_bind_port, 'n_prb':last_enodeb.n_prb, 'tm':last_enodeb.tm,
-                                'nof_ports':last_enodeb.nof_ports,
+                                'nof_ports':last_enodeb.nof_ports, 'p_a':last_enodeb.p_a
                                }
     except enodeb.DoesNotExist:
         last_enodeb = None
@@ -209,14 +210,23 @@ def api_view(request):
             if form1.is_valid():                
                 form_unsaved = form1.save(commit=False)
                 id_enb = form_unsaved.enb_id
+
                 ex = convertir_a_hexadecimal(id_enb)
                 if ex != -1:
                     enodeb.objects.all().delete()
                     form_unsaved.enb_id = ex
-                    form_unsaved.save()                
+
+                    results = modificar_enodeb(enb_id=ex, name= form_unsaved.name, mcc= form_unsaved.mcc, mnc=form_unsaved.mnc,
+                                               mme_addr=form_unsaved.mme_addr,gtp_bind_addr=form_unsaved.gtp_bind_addr,
+                                               gtp_advertise_addr=form_unsaved.gtp_advertise_addr, s1c_bind_addr=form_unsaved.s1c_bind_addr, s1c_bind_port=form_unsaved.s1c_bind_port,n_prb=form_unsaved.n_prb,
+                                               nof_ports=form_unsaved.nof_ports,tm=form_unsaved.tm, p_a=form_unsaved.p_a)
+
+                    form_unsaved.save()
+                    print(results)              
                     mensaje1 = 'Ajustes corregidos exitosamente'
                 else:
                     error1 = 'El id excede los 20 bits'
+                
               
         elif 'submit_form2' in request.POST:
             form2 = enb_files_form(request.POST)
@@ -226,7 +236,7 @@ def api_view(request):
                 form2.save()
                 mensaje2 = 'Ajustes corregidos exitosamente'
             else:
-                    error2 = 'Error al guardar formulario'
+                error2 = 'Error al guardar formulario'
         
         elif 'submit_form3' in request.POST:
             form3 = rf_form()
@@ -236,7 +246,7 @@ def api_view(request):
                 form3.save()
                 mensaje3 = 'Ajustes corregidos exitosamente'
             else:
-                    error3 = 'Error al guardar formulario'
+                error3 = 'Error al guardar formulario'
 
         elif 'submit_form4' in request.POST:
             form4 = pcap_form()
@@ -246,7 +256,7 @@ def api_view(request):
                 form4.save()
                 mensaje4 = 'Ajustes corregidos exitosamente'
             else:
-                    error4 = 'Error al guardar formulario'
+                error4 = 'Error al guardar formulario'
 
         elif 'submit_form5' in request.POST:
             form5 = log_form()
@@ -256,7 +266,7 @@ def api_view(request):
                 form5.save()
                 mensaje5 = 'Ajustes corregidos exitosamente'
             else:
-                    error5 = 'Error al guardar formulario'
+                error5 = 'Error al guardar formulario'
 
         elif 'submit_form6' in request.POST:
             form6 = scheduler_form()
@@ -266,7 +276,7 @@ def api_view(request):
                 form6.save()
                 mensaje6 = 'Ajustes corregidos exitosamente'
             else:
-                    error6 = 'Error al guardar formulario'
+                error6 = 'Error al guardar formulario'
 
         elif 'submit_form7' in request.POST:
             form7 = slicin_form()
@@ -276,7 +286,7 @@ def api_view(request):
                 form7.save()
                 mensaje7 = 'Ajustes corregidos exitosamente'
             else:
-                    error7 = 'Error al guardar formulario'
+                error7 = 'Error al guardar formulario'
 
         elif 'submit_form8' in request.POST:
             form8 = embms_form()
@@ -286,7 +296,7 @@ def api_view(request):
                 form8.save()
                 mensaje8 = 'Ajustes corregidos exitosamente'
             else:
-                    error8 = 'Error al guardar formulario'
+                error8 = 'Error al guardar formulario'
 
         #elif 'submit_form9' in request.POST:
             #form9 = channel_dl_form()
@@ -296,7 +306,7 @@ def api_view(request):
                 #form9.save()
                 #mensaje9 = 'Ajustes corregidos exitosamente'
             #else:
-                    #error9 = 'Error al guardar formulario'
+                #error9 = 'Error al guardar formulario'
 
         elif 'submit_form10' in request.POST:
             form10 = cfr_form()
@@ -306,7 +316,7 @@ def api_view(request):
                 form10.save()
                 mensaje10 = 'Ajustes corregidos exitosamente'
             else:
-                    error10 = 'Error al guardar formulario'
+                error10 = 'Error al guardar formulario'
 
         elif 'submit_form11' in request.POST:
             form11 = e2_agent_form()
@@ -316,7 +326,7 @@ def api_view(request):
                 form11.save()
                 mensaje11 = 'Ajustes corregidos exitosamente'
             else:
-                    error11 = 'Error al guardar formulario'
+                error11 = 'Error al guardar formulario'
 
         elif 'submit_form12' in request.POST:
             form12 = expert_form()
@@ -326,12 +336,21 @@ def api_view(request):
                 form12.save()
                 mensaje12 = 'Ajustes corregidos exitosamente' 
             else:
-                    error12 = 'Error al guardar formulario'               
+                error12 = 'Error al guardar formulario'               
         
+        elif 'submit_form13' in request.POST:
+            form12 = expert_form()
+            if form12.is_valid():
+                expert.objects.all().delete()
+
+                form12.save()
+                mensaje12 = 'Ajustes corregidos exitosamente' 
+            else:
+                error12 = 'Error al guardar formulario'
     return render(request, 'api/principal.html', {
         'form1':form1, 'form2':form2, 'form3':form3, 'form4':form4,'form5':form5,'form6':form6,'form7':form7,
         'form8':form8,'form10':form10,'form11':form11,'form12':form12,#'form9':form9,
-        'error':error1, 'error2':error2, 'error3':error3,'error4':error4,'error5':error5,'error6':error6,'error7':error7,
+        'error1':error1, 'error2':error2, 'error3':error3,'error4':error4,'error5':error5,'error6':error6,'error7':error7,
         'error8':error8,'error9':error9,'error10':error10,'error11':error11,'error12':error12,
         'mensaje1':mensaje1, 'mensaje2':mensaje2, 'mensaje3':mensaje3 , 'mensaje4': mensaje4,'mensaje5': mensaje5,
         'mensaje6': mensaje6,'mensaje7': mensaje7,'mensaje8': mensaje8,'mensaje9': mensaje9,'mensaje10': mensaje10,'mensaje11': mensaje11,'mensaje12': mensaje12,

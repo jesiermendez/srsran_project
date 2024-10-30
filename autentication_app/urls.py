@@ -5,7 +5,8 @@ from . import views
 
 urlpatterns = [
     path('', views.login_view, name='login' ),
-    path('logout/', views.logout_view, name='logout')
+    path('registrar/', views.register_view, name='register'),
+    path('logout/', views.logout_view, name='logout'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

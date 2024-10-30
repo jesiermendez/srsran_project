@@ -15,7 +15,7 @@ def convertir_a_hexadecimal(x):
 
 class enodeb_form(forms.ModelForm):  
     country_code = [
-        ('1', '+1 EE.UU'),
+        ('001', '+1 EE.UU'),
         ('52', '+52 Mexico'),
         ('34', '+34 España'),
         ('44', '+44 UK'),
@@ -57,6 +57,16 @@ class enodeb_form(forms.ModelForm):
         ('3', '3'),
         ('4', '4'),
     ]
+    p_a_op = [
+        ('-6','-6'),
+        ('-4.77','-4.77'),
+        ('-3','-3'),
+        ('-1.77','-1.77'),
+        ('0','0'),
+        ('1','1'),
+        ('2','2'),
+        ('3','3'),
+    ]
 
     enb_id = forms.IntegerField(label='Id del enodeb')
     mcc = forms.ChoiceField(choices=country_code, label='Código de pais')
@@ -70,11 +80,15 @@ class enodeb_form(forms.ModelForm):
     gtp_bind_addr = forms.GenericIPAddressField(protocol='both', unpack_ipv4=False, label = 'Dirección IP local para vincular conección GTP')
     gtp_advertise_addr = forms.GenericIPAddressField(protocol='both', unpack_ipv4=False, label = 'Dirección IP de eNB para anunciar el tráfico DL GTP-U')
     s1c_bind_addr = forms.GenericIPAddressField(protocol='both', unpack_ipv4=False, label = 'Direccion IP local para vincular conección S1AP')
+    p_a = forms.ChoiceField(choices=p_a_op, label='p_a')
 
     class Meta:
         model = enodeb
-        fields = ['enb_id', 'mcc', 'mnc', 'mme_addr', 'gtp_bind_addr', 'gtp_advertise_addr', 's1c_bind_addr',
-                  's1c_bind_port', 'n_prb', 'tm', 'nof_ports']
+        fields = ['enb_id', 'name', 'mcc', 'mnc', 'mme_addr', 'gtp_bind_addr', 'gtp_advertise_addr', 's1c_bind_addr',
+                  's1c_bind_port', 'n_prb', 'tm', 'nof_ports', 'p_a']
+        labels = {
+            'name':'Nombre del eNB',
+        }
         
         def __init__(self, *args, **kwargs):
             super(enodeb_form, self).__init__(*args, **kwargs)
@@ -159,14 +173,16 @@ class rf_form(forms.ModelForm):
 class pcap_form(forms.ModelForm):
     class Meta:
         model = pcap
-        fields = ['enable', 'filename', 'nr_filename', 's1ap_enable', 's1ap_filename',
-                  'mac_net_enable', 'bind_ip', 'bind_port', 'client_ip', 'client_port']        
+        fields = ['enable', 'filename', 'nr_filename', 's1ap_enable', 's1ap_filename','ngap_enable',
+                  'ngap_filename', 'mac_net_enable', 'bind_ip', 'bind_port', 'client_ip', 'client_port']        
         labels = {
             'enable': 'Habilitar capturas de paquetes MAC',
             'filename': 'Ruta del archivo para capturas de paquetes MAC LTE',
             'nr_filename': 'Ruta del archivo para capturas de paquetes MAC NR',
             's1ap_enable': 'Habilitar/Deshabilitar la captura de S1AP',
             's1ap_filename': 'Nombre del archivo para guardar las capturas de S1AP',
+            'ngap_enable':'Habilitar ngap',
+            'ngap_filename':'Ruta del archivo ngap',
             'mac_net_enable': 'Habilitar capturas de paquete MAC',
             'bind_ip': 'Dirección IP de enlace para rastreo de red MAC',
             'bind_port': 'Puerto de enlace para rastreo de red MAC',
@@ -185,13 +201,28 @@ class pcap_form(forms.ModelForm):
 class log_form(forms.ModelForm):
     class Meta:
         model = log
-        fields = ['all_level', 'all_hex_limit', 'filename', 'file_max_size', 'gui_enable',]        
+        fields = ['all_level', 'rf_level', 'phy_level', 'phy_hex_limit', 'phy_lib_level', 'rlc_level',
+                  'mac_level', 'mac_hex_limit', 'rlc_hex_limit', 'pdcp_level', 'pdcp_hex_limit', 'rrc_level',
+                  'rrc_hex_limit', 'gtpu_level', 's1ap_hex_limit', 'stack_level', 'all_hex_limit', 'filename', 'file_max_size']        
         labels = {
-            'all_level': 'Nivel de registro para todas las capas',
+            'all_level':'Nivel de registro para todas las capas',
+            'rf_level':'Nivel de registro rf',
+            'phy_level':'Nivel de registro phy',
+            'phy_hex_limit':'Limite de volcado para phy',
+            'phy_lib_level':'phy lib level phy',
+            'mac_level':'Nivel de registro mac',
+            'mac_hex_limit':'Limite de volcado para mac',
+            'pdcp_level':'Nivel de registro pdcp',
+            'rlc_hex_limit':'Limite de volcado para rlc',
+            'pdcp_hex_limit':'Limite de volcado para pdcp',
+            'rrc_level':'Nivel de registro para rrc',
+            'rrc_hex_limit':'Limite de volcado para rrc',
+            's1ap_hex_limit':'Limite de volcado para s1ap',
+            'stack_level':'Nivel de registro stack',
+            'stack_hex_limit':'Limite de volcado para stack',
             'all_hex_limit': 'Limite de volcado para todas las capas',
             'filename': 'Ruta del archivo para la salida del registro',
-            'file_max_size': 'Tamaño máximo del archivo de registro (kilobytes)',
-            'gui_enable': 'Habilitar deshabilitar interfáz gráfica (GUI)',            
+            'file_max_size': 'Tamaño máximo del archivo de registro (kilobytes)',                       
         }
         def __init__(self, *args, **kwargs):
             super(log_form, self).__init__(*args, **kwargs)
@@ -288,17 +319,31 @@ class embms_form(forms.ModelForm):
             self.helper.label_class = 'col-lg-2'
             self.helper.field_class = 'col-lg-8'
             self.helper.add_input(Submit('submit', 'Guardar'))
-'''
-class channel_dl_form(forms.ModelForm): #Falta por crear este y utiliza JSonFields
+
+class channel_dl_form(forms.ModelForm):
     class Meta:
         model = channel_dl
-        fields = ['', '', '', '', '',]        
+        fields = ['dl_enable', 'dl_awgn_enable', 'dl_awgn_snr', 'dl_fading_enable', 'dl_fading_model', 'dl_delay_enable',
+                  'dl_delay_period_s', 'dl_delay_init_time_s','dl_delay_maximum_us', 'dl_delay_minimum_us', 'dl_rlf_enable',
+                  'dl_rlf_t_on_ms', 'dl_rlf_t_off_ms', 'dl_hst_enable', 'dl_hst_period_s','dl_hst_fd_hz', 'dl_hst_init_time_s']        
         labels = {
-            '': '',
-            '': '',
-            '': '',
-            '': '',
-            '': '',            
+            'dl_enable': 'dl enable',
+            'dl_awgn_enable': 'dl awgn enable',
+            'dl_awgn_snr': 'dl awgn snr',
+            'dl_fading_enable': 'dl fading enable',
+            'dl_fading_model': 'dl fading model',
+            'dl_delay_enable': 'dl delay enable',
+            'dl_delay_period_s': 'dl delay period s',
+            'dl_delay_init_time_s': 'dl delay init time s',
+            'dl_delay_maximum_us': 'dl delay maximum us',
+            'dl_delay_minimum_us': 'dl delay minimum us',
+            'dl_rlf_enable': 'dl rlf enable',
+            'dl_rlf_t_on_ms': 'dl rlf t on ms',
+            'dl_rlf_t_off_ms': 'dl rlf t off ms',
+            'dl_hst_enable': 'dl hst enable',
+            'dl_hst_period_s': 'dl hst period s',
+            'dl_hst_fd_hz': 'dl hst fd hz',
+            'dl_hst_init_time_s': 'dl hst init time s',            
         }
         def __init__(self, *args, **kwargs):
             super(channel_dl_form, self).__init__(*args, **kwargs)
@@ -308,7 +353,43 @@ class channel_dl_form(forms.ModelForm): #Falta por crear este y utiliza JSonFiel
             self.helper.label_class = 'col-lg-2'
             self.helper.field_class = 'col-lg-8'
             self.helper.add_input(Submit('submit', 'Guardar'))
-'''
+
+class channel_ul_form(forms.ModelForm):
+    class Meta:
+        model = channel_ul
+        fields = ['ul_enable', 'ul_awgn_enable', 'ul_awgn_signal_power', 'ul_awgn_snr', 'ul_fading_enable',
+                  'ul_fading_model', 'ul_delay_enable', 'ul_delay_period_s', 'ul_delay_init_time_s',
+                  'ul_delay_maximum_us', 'ul_delay_minimum_us', 'ul_rlf_enable', 'ul_rlf_t_on_ms',
+                  'ul_rlf_t_off_ms', 'ul_hst_enable', 'ul_hst_period_s', 'ul_hst_fd_hz', 'ul_hst_init_time_s']        
+        labels = {
+            'ul_enable': 'ul enable',
+            'ul_awgn_enable': 'ul awgn enable',
+            'ul_awgn_signal_power': 'ul awgn signal power',
+            'ul_awgn_snr': 'ul awgn snr',
+            'ul_fading_enable': 'ul fading enable',
+            'ul_fading_model': 'ul fading model',
+            'ul_delay_enable': 'ul delay enable',
+            'ul_delay_period_s': 'ul delay period s',
+            'ul_delay_init_time_s': 'ul delay init time s',
+            'ul_delay_maximum_us': 'ul delay maximum us',
+            'ul_delay_minimum_us': 'ul delay minimum us',
+            'ul_rlf_enable': 'ul rlf enable',
+            'ul_rlf_t_on_ms': 'ul rlf t on ms',
+            'ul_rlf_t_off_ms': 'ul rlf t off ms',
+            'ul_hst_enable': 'ul hst enable',
+            'ul_hst_period_s': 'ul hst period s',
+            'ul_hst_fd_hz': 'ul hst fd hz',
+            'ul_hst_init_time_s': 'ul hst init time s',            
+        }
+        def __init__(self, *args, **kwargs):
+            super(channel_ul_form, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.form_method = 'post'
+            self.helper.form_class = 'form-vertical'
+            self.helper.label_class = 'col-lg-2'
+            self.helper.field_class = 'col-lg-8'
+            self.helper.add_input(Submit('submit', 'Guardar'))
+
 class cfr_form(forms.ModelForm):
     class Meta:
         model = cfr
@@ -353,21 +434,45 @@ class e2_agent_form(forms.ModelForm):
             self.helper.field_class = 'col-lg-8'
             self.helper.add_input(Submit('submit', 'Guardar'))
 
+class gui_form(forms.ModelForm):
+    class Meta:
+        model = gui
+        fields = ('enable',)
+        labels = {
+            'enable': 'Habilitar deshabilitar interfáz gráfica (GUI)', 
+        }
+
+        def __init__(self, *args, **kwargs):
+            super(gui_form, self).__init__(*args, **kwargs)
+            self.helper = FormHelper()
+            self.helper.form_method = 'post'
+            self.helper.form_class = 'form-vertical'
+            self.helper.label_class = 'col-lg-2'
+            self.helper.field_class = 'col-lg-8'
+            self.helper.add_input(Submit('submit', 'Guardar'))
+
 class expert_form(forms.ModelForm):
     class Meta:
         model = expert
-        fields = ['pusch_max_its', 'nr_pusch_max_its', 'pusch_8bit_decoder', 'nof_phy_threads', 'metrics_period_secs',
+        fields = ['pusch_max_its', 'nr_pusch_max_its', 'pusch_8bit_decoder', 'pusch_meas_evm', 'nof_prach_threads', 'equalizer_mode',
+                  'estimator_fil_w', 'lte_sample_rates', 'print_buffer_state', 'nof_phy_threads', 'metrics_period_secs',
                   'metrics_csv_enable', 'metrics_csv_filename', 'report_json_enable', 'report_json_filename', 'report_json_asn1_oct',
                   'alarms_log_enable', 'alarms_filename', 'tracing_enable', 'tracing_filename', 'tracing_buffcapacity',
                   'stdout_ts_enable', 'tx_amplitude', 'rrc_inactivity_timer', 'max_mac_dl_kos', 'max_mac_ul_kos',
                   'max_prach_offset_us', 'nof_prealloc_ues', 'rlf_release_timer_ms', 'lcid_padding', 'eea_pref_list',
                   'eia_pref_list', 'gtpu_tunnel_timeout', 'extended_cp', 'ts1_reloc_prep_timeout', 'ts1_reloc_overall_timeout',
-                  'rlf_min_ul_snr_estim', 's1_setup_max_retries', 's1_connect_timer', 'rx_gain_offset', 'mac_prach_bi',
-                  'use_cedron_f_est_alg',]        
+                  'rlf_min_ul_snr_estim', 'max_s1_setup_retries', 's1_setup_max_retries', 's1_connect_timer', 'rx_gain_offset', 'mac_prach_bi',
+                  'use_cedron_f_est_alg', 'sctp_reuse_addr', 'sctp_rto_max', 'sctp_init_max_attempts', 'sctp_max_init_timeo',]        
         labels = {
             'pusch_max_its': 'Número máximo de iteraciones del decodificador turbo',
             'nr_pusch_max_its': 'Número máximo de iteraciones LDPC para NR',
             'pusch_8bit_decoder': 'Representación LLR y cálculo de enrejado del decodificador turbo',
+            'pusch_meas_evm':'pusch_meas_evm',
+            'nof_prach_threads':'nof_prach_threads',
+            'equalizer_mode':'equalizer_mode',
+            'estimator_fil_w':'estimator_fil_w',
+            'lte_sample_rates':'lte_sample_rates',
+            'print_buffer_state':'print_buffer_state',
             'nof_phy_threads': 'Seleccionar la cantidad de subprocesos (Experimental)',
             'metrics_period_secs': 'Periodo de solicitud de metrica eNB',
             'metrics_csv_enable': 'Escribir metricas eNB en un archivo CSV',
@@ -396,11 +501,16 @@ class expert_form(forms.ModelForm):
             'ts1_reloc_prep_timeout': 'S1AP TS 36.413 TS1RelocPrep Expiry Timeout value in milliseconds',
             'ts1_reloc_overall_timeout': 'S1AP TS 36.413 TS1RelocOverall Expiry Timeout value in milliseconds',
             'rlf_min_ul_snr_estim': 'SNR threshold in dB below which the enb is notified with RLF ko',
+            'max_s1_setup_retries':'max_s1_setup_retries',
             's1_setup_max_retries': 'Maximum amount of retries to setup the S1AP connection.',
             's1_connect_timer': 'Connection Retry Timer for S1 connection (seconds)',
             'rx_gain_offset': 'Desplazamiento de ganancia RX',
             'mac_prach_bi': 'MAC prach bi',
-            'use_cedron_f_est_alg': 'Utilizar o no algoritmo cedron para la estimacion de TA',           
+            'use_cedron_f_est_alg': 'Utilizar o no algoritmo cedron para la estimacion de TA',
+            'sctp_reuse_addr':'sctp_reuse_addr',
+            'sctp_rto_max':'sctp_rto_max',
+            'sctp_init_max_attempts':'sctp_init_max_attempts',
+            'sctp_max_init_timeo':'sctp_max_init_timeo',        
         }
         def __init__(self, *args, **kwargs):
             super(expert_form, self).__init__(*args, **kwargs)

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Start{% endblock %}
+<style>
+body, html {
+    height: 100%;
+    }
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.form-container {
+    max-width: 400px;
+    width: 100%;
+}
+</style>
+
+{% block content %}
+<header class="bg-estilo text-center py-3">
+    <h1 class="form-title1">Registro de Acceso</h1>
+</header>
+<br>
+<br>
+<main>
+    <div class="content-wrapper cuadro-formulario">
+        <div class="form-container  p-4 rounded shadow-sm">
+            <h2 class="text-primary mb-4 text-center form-title">Registro</h2>
+            <form method="post" class="form-group form-control" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div >
+                    {{ form.as_p }}
+                    {% if form1.errors %}
+                        <div class="mensaje-error">
+                            {{ form1.errors }}
+                        </div>
+                    {% endif %}
+                </div>                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Registrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
