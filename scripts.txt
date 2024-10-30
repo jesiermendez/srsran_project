@@ -1,0 +1,336 @@
+Configuration options:
+  --enb.enb_id arg (=0x0)               eNodeB ID
+  --enb.name arg (=srsenb01)            eNodeB Name
+  --enb.mcc arg (=001)                  Mobile Country Code
+  --enb.mnc arg (=01)                   Mobile Network Code
+  --enb.mme_addr arg (=127.0.0.1)       IP address of MME for S1 connection
+  --enb.gtp_bind_addr arg (=192.168.3.1)
+                                        Local IP address to bind for GTP 
+                                        connection
+  --enb.gtp_advertise_addr arg          IP address of eNB to advertise for DL 
+                                        GTP-U Traffic
+  --enb.s1c_bind_addr arg (=192.168.3.1)
+                                        Local IP address to bind for S1AP 
+                                        connection
+  --enb.s1c_bind_port arg (=0)          Source port for S1AP connection (0 
+                                        means any)
+  --enb.n_prb arg (=25)                 Number of PRB
+  --enb.nof_ports arg (=1)              Number of ports
+  --enb.tm arg (=1)                     Transmission mode (1-8)
+  --enb.p_a arg (=0)                    Power allocation rho_a (-6, -4.77, -3, 
+                                        -1.77, 0, 1, 2, 3)
+  --enb_files.sib_config arg (=sib.conf)
+                                        SIB configuration files
+  --enb_files.rr_config arg (=rr.conf)  RR configuration files
+  --enb_files.rb_config arg (=rb.conf)  SRB/DRB configuration files
+  --rf.dl_earfcn arg (=0)               Force Downlink EARFCN for single cell
+  --rf.srate arg (=0)                   Force Tx and Rx sampling rate in Hz
+  --rf.rx_gain arg (=50)                Front-end receiver gain
+  --rf.tx_gain arg (=70)                Front-end transmitter gain
+  --rf.tx_gain[0] arg (=-1)             Front-end transmitter gain CH0
+  --rf.tx_gain[1] arg (=-1)             Front-end transmitter gain CH1
+  --rf.tx_gain[2] arg (=-1)             Front-end transmitter gain CH2
+  --rf.tx_gain[3] arg (=-1)             Front-end transmitter gain CH3
+  --rf.tx_gain[4] arg (=-1)             Front-end transmitter gain CH4
+  --rf.dl_freq arg (=-1)                Downlink Frequency (if positive 
+                                        overrides EARFCN)
+  --rf.ul_freq arg (=-1)                Uplink Frequency (if positive overrides
+                                        EARFCN)
+  --rf.device_name arg (=auto)          Front-end device name
+  --rf.device_args arg (=auto)          Front-end device arguments
+  --rf.time_adv_nsamples arg (=auto)    Transmission time advance
+  --gui.enable arg (=0)                 Enable GUI plots
+  --log.rf_level arg                    RF log level
+  --log.phy_level arg                   PHY log level
+  --log.phy_hex_limit arg               PHY log hex dump limit
+  --log.phy_lib_level arg (=none)       PHY lib log level
+  --log.mac_level arg                   MAC log level
+  --log.mac_hex_limit arg               MAC log hex dump limit
+  --log.rlc_level arg                   RLC log level
+  --log.rlc_hex_limit arg               RLC log hex dump limit
+  --log.pdcp_level arg                  PDCP log level
+  --log.pdcp_hex_limit arg              PDCP log hex dump limit
+  --log.rrc_level arg                   RRC log level
+  --log.rrc_hex_limit arg               RRC log hex dump limit
+  --log.gtpu_level arg                  GTPU log level
+  --log.gtpu_hex_limit arg              GTPU log hex dump limit
+  --log.s1ap_level arg                  S1AP log level
+  --log.s1ap_hex_limit arg              S1AP log hex dump limit
+  --log.stack_level arg                 Stack log level
+  --log.stack_hex_limit arg             Stack log hex dump limit
+  --log.all_level arg (=info)           ALL log level
+  --log.all_hex_limit arg (=32)         ALL log hex dump limit
+  --log.filename arg (=/tmp/ue.log)     Log filename
+  --log.file_max_size arg (=-1)         Maximum file size (in kilobytes). When 
+                                        passed, multiple files are created. 
+                                        Default -1 (single file)
+  --pcap.enable arg (=0)                Enable MAC packet captures for 
+                                        wireshark
+  --pcap.filename arg (=/tmp/enb_mac.pcap)
+                                        MAC layer capture filename
+  --pcap.nr_filename arg (=/tmp/enb_mac_nr.pcap)
+                                        NR MAC layer capture filename
+  --pcap.s1ap_enable arg (=0)           Enable S1AP packet captures for 
+                                        wireshark
+  --pcap.s1ap_filename arg (=/tmp/enb_s1ap.pcap)
+                                        S1AP layer capture filename
+  --pcap.ngap_enable arg (=0)           Enable NGAP packet captures for 
+                                        wireshark
+  --pcap.ngap_filename arg (=/tmp/enb_ngap.pcap)
+                                        NGAP layer capture filename
+  --pcap.mac_net_enable arg (=0)        Enable MAC network captures
+  --pcap.bind_ip arg (=0.0.0.0)         Bind IP address for MAC network trace
+  --pcap.bind_port arg (=5687)          Bind port for MAC network trace
+  --pcap.client_ip arg (=127.0.0.1)     Client IP address for MAC network trace
+  --pcap.client_port arg (=5847)        Enable MAC network captures
+  --scheduler.policy arg (=time_pf)     DL and UL data scheduling policy (E.g. 
+                                        time_rr, time_pf)
+  --scheduler.policy_args arg (=2)      Scheduler policy-specific arguments
+  --scheduler.pdsch_mcs arg (=-1)       Optional fixed PDSCH MCS (ignores 
+                                        reported CQIs if specified)
+  --scheduler.pdsch_max_mcs arg (=-1)   Optional PDSCH MCS limit
+  --scheduler.pusch_mcs arg (=-1)       Optional fixed PUSCH MCS (ignores 
+                                        reported CQIs if specified)
+  --scheduler.pusch_max_mcs arg (=-1)   Optional PUSCH MCS limit
+  --scheduler.min_aggr_level arg (=0)   Optional minimum aggregation level 
+                                        index (l=log2(L)) 
+  --scheduler.max_aggr_level arg (=3)   Optional maximum aggregation level 
+                                        index (l=log2(L)) 
+  --scheduler.adaptive_aggr_level arg (=0)
+                                        Boolean flag to enable/disable adaptive
+                                        aggregation level based on target BLER
+  --scheduler.max_nof_ctrl_symbols arg (=3)
+                                        Number of control symbols
+  --scheduler.min_nof_ctrl_symbols arg (=1)
+                                        Minimum number of control symbols
+  --scheduler.pucch_multiplex_enable arg (=0)
+                                        Enable PUCCH multiplexing
+  --scheduler.pucch_harq_max_rb arg (=0)
+                                        Maximum number of RB to be used for 
+                                        PUCCH on the edges of the grid
+  --scheduler.target_bler arg (=0.0500000007)
+                                        Target BLER (in decimal) to achieve via
+                                        adaptive link
+  --scheduler.max_delta_dl_cqi arg (=5) Maximum shift in CQI for adaptive DL 
+                                        link
+  --scheduler.max_delta_ul_snr arg (=5) Maximum shift in UL SNR for adaptive UL
+                                        link
+  --scheduler.adaptive_dl_mcs_step_size arg (=0.00100000005)
+                                        Step size or learning rate used in 
+                                        adaptive DL MCS link
+  --scheduler.adaptive_ul_mcs_step_size arg (=0.00100000005)
+                                        Step size or learning rate used in 
+                                        adaptive UL MCS link
+  --scheduler.min_tpc_tti_interval arg (=1)
+                                        Minimum TTI interval between positive 
+                                        or negative TPCs
+  --scheduler.ul_snr_avg_alpha arg (=0.0500000007)
+                                        Exponential Average alpha coefficient 
+                                        used in estimation of UL SNR
+  --scheduler.init_ul_snr_value arg (=5)
+                                        Initial UL SNR value used for computing
+                                        MCS in the first UL grant
+  --scheduler.init_dl_cqi arg (=5)      DL CQI value used before any CQI report
+                                        is available to the eNB
+  --scheduler.max_sib_coderate arg (=0.800000012)
+                                        Upper bound on SIB and RAR grants 
+                                        coderate
+  --scheduler.pdcch_cqi_offset arg (=0) CQI offset in derivation of PDCCH 
+                                        aggregation level
+  --slicing.enable_eMBB arg (=1)        Enables enhanced mobile broadband 
+                                        (eMBB) slice in the gNodeB
+  --slicing.enable_URLLC arg (=0)       Enables Ultra Reliable Low Latency 
+                                        Communications (URLLC) slice in the 
+                                        gNodeB
+  --slicing.enable_MIoT arg (=0)        Enables Massive Internet of Things 
+                                        (MIoT) slice in the gNodeB
+  --slicing.eMBB_sd arg (=0)             eMBB slice differentiator
+  --slicing.URLLC_sd arg (=0)            URLLC slice differentiator
+  --slicing.MIoT_sd arg (=0)              slice differentiator
+  --channel.dl.enable arg (=0)          Enable/Disable internal Downlink 
+                                        channel emulator
+  --channel.dl.awgn.enable arg (=0)     Enable/Disable AWGN simulator
+  --channel.dl.awgn.snr arg (=30)       Target SNR in dB
+  --channel.dl.fading.enable arg (=0)   Enable/Disable Fading model
+  --channel.dl.fading.model arg (=none) Fading model + maximum doppler (E.g. 
+                                        none, epa5, eva70, etu300, etc)
+  --channel.dl.delay.enable arg (=0)    Enable/Disable Delay simulator
+  --channel.dl.delay.period_s arg (=3600)
+                                        Delay period in seconds (integer)
+  --channel.dl.delay.init_time_s arg (=0)
+                                        Initial time in seconds
+  --channel.dl.delay.maximum_us arg (=100)
+                                        Maximum delay in microseconds
+  --channel.dl.delay.minimum_us arg (=10)
+                                        Minimum delay in microseconds
+  --channel.dl.rlf.enable arg (=0)      Enable/Disable Radio-Link Failure 
+                                        simulator
+  --channel.dl.rlf.t_on_ms arg (=10000) Time for On state of the channel (ms)
+  --channel.dl.rlf.t_off_ms arg (=2000) Time for Off state of the channel (ms)
+  --channel.dl.hst.enable arg (=0)      Enable/Disable HST simulator
+  --channel.dl.hst.period_s arg (=7.19999981)
+                                        HST simulation period in seconds
+  --channel.dl.hst.fd_hz arg (=750)     Doppler frequency in Hz
+  --channel.dl.hst.init_time_s arg (=0) Initial time in seconds
+  --channel.ul.enable arg (=0)          Enable/Disable internal Downlink 
+                                        channel emulator
+  --channel.ul.awgn.enable arg (=0)     Enable/Disable AWGN simulator
+  --channel.ul.awgn.signal_power arg (=30)
+                                        Received signal power in decibels full 
+                                        scale (dBfs)
+  --channel.ul.awgn.snr arg (=30)       Noise level in decibels full scale 
+                                        (dBfs)
+  --channel.ul.fading.enable arg (=0)   Enable/Disable Fading model
+  --channel.ul.fading.model arg (=none) Fading model + maximum doppler (E.g. 
+                                        none, epa5, eva70, etu300, etc)
+  --channel.ul.delay.enable arg (=0)    Enable/Disable Delay simulator
+  --channel.ul.delay.period_s arg (=3600)
+                                        Delay period in seconds (integer)
+  --channel.ul.delay.init_time_s arg (=0)
+                                        Initial time in seconds
+  --channel.ul.delay.maximum_us arg (=100)
+                                        Maximum delay in microseconds
+  --channel.ul.delay.minimum_us arg (=10)
+                                        Minimum delay in microseconds
+  --channel.ul.rlf.enable arg (=0)      Enable/Disable Radio-Link Failure 
+                                        simulator
+  --channel.ul.rlf.t_on_ms arg (=10000) Time for On state of the channel (ms)
+  --channel.ul.rlf.t_off_ms arg (=2000) Time for Off state of the channel (ms)
+  --channel.ul.hst.enable arg (=0)      Enable/Disable HST simulator
+  --channel.ul.hst.period_s arg (=7.19999981)
+                                        HST simulation period in seconds
+  --channel.ul.hst.fd_hz arg (=750)     Doppler frequency in Hz
+  --channel.ul.hst.init_time_s arg (=0) Initial time in seconds
+  --cfr.enable arg (=0)                 CFR enable
+  --cfr.mode arg (=manual)              CFR mode
+  --cfr.manual_thres arg (=0.5)         Fixed manual clipping threshold for CFR
+                                        manual mode
+  --cfr.strength arg (=1)               CFR ratio between amplitude-limited vs 
+                                        original signal (0 to 1)
+  --cfr.auto_target_papr arg (=8)       Signal PAPR target (in dB) in CFR auto 
+                                        modes
+  --cfr.ema_alpha arg (=0.142857149)    Alpha coefficient for the power average
+                                        in auto_ema mode (0 to 1)
+  --e2_agent.enable arg (=0)            Enables the E2 agent
+  --e2_agent.ric_ip arg (=127.0.0.1)    RIC IP address
+  --e2_agent.ric_port arg (=36421)      RIC port
+  --e2_agent.ric_bind_ip arg (=127.0.0.1)
+                                        Local IP address to bind for RIC 
+                                        connection
+  --e2_agent.ric_bind_port arg (=36425) Local port to bind for RIC connection
+  --e2_agent.max_ric_setup_retries arg (=-1)
+                                        Max RIC setup retries
+  --e2_agent.ric_connect_timer arg (=10)
+                                        Connection Retry Timer for RIC 
+                                        connection (seconds)
+  --expert.metrics_period_secs arg (=1) Periodicity for metrics in seconds.
+  --expert.metrics_csv_enable arg (=0)  Write metrics to CSV file.
+  --expert.metrics_csv_filename arg (=/tmp/enb_metrics.csv)
+                                        Metrics CSV filename.
+  --expert.pusch_max_its arg (=8)       Maximum number of turbo decoder 
+                                        iterations for LTE.
+  --expert.pusch_8bit_decoder arg (=0)  Use 8-bit for LLR representation and 
+                                        turbo decoder trellis computation 
+                                        (Experimental).
+  --expert.pusch_meas_evm arg (=0)      Enable/Disable PUSCH EVM measure.
+  --expert.tx_amplitude arg (=0.600000024)
+                                        Transmit amplitude factor.
+  --expert.nof_phy_threads arg (=3)     Number of PHY threads.
+  --expert.nof_prach_threads arg (=1)   Number of PRACH workers per carrier. 
+                                        Only 1 or 0 is supported.
+  --expert.max_prach_offset_us arg (=30)
+                                        Maximum allowed RACH offset (in us).
+  --expert.equalizer_mode arg (=mmse)   Equalizer mode.
+  --expert.estimator_fil_w arg (=0.100000001)
+                                        Chooses the coefficients for the 3-tap 
+                                        channel estimator centered filter.
+  --expert.lte_sample_rates arg (=0)    Whether to use default LTE sample rates
+                                        instead of shorter variants.
+  --expert.report_json_enable arg (=0)  Write eNB report to JSON file (default 
+                                        disabled).
+  --expert.report_json_filename arg (=/tmp/enb_report.json)
+                                        Report JSON filename (default 
+                                        /tmp/enb_report.json).
+  --expert.report_json_asn1_oct arg (=0)
+                                        Prints ASN1 messages encoded as an 
+                                        octet string instead of plain text in 
+                                        the JSON report file.
+  --expert.alarms_log_enable arg (=0)   Enable Alarms logging (default 
+                                        diabled).
+  --expert.alarms_filename arg (=/tmp/enb_alarms.log)
+                                        Alarms logging filename (default 
+                                        /tmp/alarms.log).
+  --expert.tracing_enable arg (=0)      Events tracing.
+  --expert.tracing_filename arg (=/tmp/enb_tracing.log)
+                                        Tracing events filename.
+  --expert.tracing_buffcapacity arg (=1000000)
+                                        Tracing buffer capcity.
+  --expert.stdout_ts_enable arg (=0)    Prints once per second the timestamp 
+                                        into stdout.
+  --expert.rrc_inactivity_timer arg (=30000)
+                                        Inactivity timer in ms.
+  --expert.print_buffer_state arg (=0)  Prints on the console the buffer state 
+                                        every 10 seconds.
+  --expert.eea_pref_list arg (=EEA0, EEA2, EEA1)
+                                        Ordered preference list for the 
+                                        selection of encryption algorithm (EEA)
+                                        (default: EEA0, EEA2, EEA1).
+  --expert.eia_pref_list arg (=EIA2, EIA1, EIA0)
+                                        Ordered preference list for the 
+                                        selection of integrity algorithm (EIA) 
+                                        (default: EIA2, EIA1, EIA0).
+  --expert.nof_prealloc_ues arg (=8)    Number of UE resources to preallocate 
+                                        during eNB initialization.
+  --expert.lcid_padding arg (=3)        LCID on which to put MAC padding
+  --expert.max_mac_dl_kos arg (=100)    Maximum number of consecutive KOs in DL
+                                        before triggering the UE's release 
+                                        (default 100).
+  --expert.max_mac_ul_kos arg (=100)    Maximum number of consecutive KOs in UL
+                                        before triggering the UE's release 
+                                        (default 100).
+  --expert.gtpu_tunnel_timeout arg (=0) Maximum time that GTPU takes to release
+                                        indirect forwarding tunnel since the 
+                                        last received GTPU PDU (0 for 
+                                        infinity).
+  --expert.rlf_release_timer_ms arg (=4000)
+                                        Time taken by eNB to release UE context
+                                        after it detects an RLF.
+  --expert.extended_cp arg (=0)         Use extended cyclic prefix
+  --expert.ts1_reloc_prep_timeout arg (=10000)
+                                        S1AP TS 36.413 TS1RelocPrep Expiry 
+                                        Timeout value in milliseconds.
+  --expert.ts1_reloc_overall_timeout arg (=10000)
+                                        S1AP TS 36.413 TS1RelocOverall Expiry 
+                                        Timeout value in milliseconds.
+  --expert.rlf_min_ul_snr_estim arg (=-2)
+                                        SNR threshold in dB below which the eNB
+                                        is notified with rlf ko.
+  --expert.max_s1_setup_retries arg (=-1)
+                                        Max S1 setup retries
+  --expert.s1_connect_timer arg (=10)   Connection Retry Timer for S1 
+                                        connection (seconds)
+  --expert.sctp_reuse_addr arg (=0)     Use SO_REUSE_ADDR on S1-C interface.
+  --expert.sctp_rto_max arg (=6000)     SCTP maximum RTO.
+  --expert.sctp_init_max_attempts arg (=3)
+                                        Maximum SCTP init attempts.
+  --expert.sctp_max_init_timeo arg (=5000)
+                                        Maximum SCTP init timeout.
+  --expert.rx_gain_offset arg (=62)     RX Gain offset to add to rx_gain to 
+                                        calibrate RSRP readings
+  --expert.mac_prach_bi arg (=0)        Backoff Indicator to reduce contention 
+                                        in the PRACH channel
+  --expert.use_cedron_f_est_alg arg (=0)
+                                        Whether to use Cedron freq estimation 
+                                        algorithm or not
+  --embms.enable arg (=0)               Enables MBMS in the eNB
+  --embms.m1u_multiaddr arg (=239.255.0.1)
+                                        M1-U Multicast address the eNB joins.
+  --embms.m1u_if_addr arg (=127.0.1.201)
+                                        IP address of the interface the eNB 
+                                        will listen for M1-U traffic.
+  --embms.mcs arg (=20)                 Modulation and Coding scheme of MBMS 
+                                        traffic.
+  --scheduler.nr_pdsch_mcs arg (=28)    Fixed NR DL MCS (-1 for dynamic).
+  --scheduler.nr_pusch_mcs arg (=28)    Fixed NR UL MCS (-1 for dynamic).
+  --expert.nr_pusch_max_its arg (=10)   Maximum number of LDPC iterations for 
+                                        NR.
