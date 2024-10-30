@@ -72,7 +72,7 @@
                                             
                     <form method="post">
                         {% csrf_token %}
-                        {{ form.non_field_errors }}
+                        {{ form1.non_field_errors }}
                         <div class="form-group">                            
                             <label for="{{ form1.enb_id.id_for_label }}">{{ form1.enb_id.label }}</label>
                             {{ form1.enb_id }}
@@ -213,7 +213,7 @@
                     {% endif %} 
                     <form method="post">                        
                         {% csrf_token %}
-                        {{ form.non_field_errors }}
+                        {{ form2.non_field_errors }}
                         <div class="form-group">                            
                             <label for="{{ form2.sib_config.id_for_label }}">{{ form2.sib_config.label }}</label>
                             {{ form2.sib_config }}
@@ -252,7 +252,14 @@
                 <div class="form-container cuadro-formulario">
                     <h2 class="form-title">Configuración 3</h2>
                     <br>
-                    <form>
+                    {% if mensaje3 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje3 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form3.non_field_errors }}
                         <div class="form-group">
                             <label for="input9">Campo 9</label>
                             <input type="text" class="form-control" id="input5" placeholder="Ingrese valor">
@@ -270,7 +277,7 @@
                             <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form3">Guardar</button>
                         </div>
                     </form>
                 </div>
