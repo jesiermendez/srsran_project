@@ -271,6 +271,7 @@ def api_view(request):
             form3 = rf_form()
             if form3.is_valid():
                 rf.objects.all().delete()
+                datos=form3.cleaned_data
 
                 form3.save()
                 mensaje3 = 'Ajustes corregidos exitosamente'
@@ -281,6 +282,7 @@ def api_view(request):
             form4 = pcap_form()
             if form4.is_valid():
                 pcap.objects.all().delete()
+                datos=form4.cleaned_data
 
                 form4.save()
                 mensaje4 = 'Ajustes corregidos exitosamente'
@@ -291,6 +293,7 @@ def api_view(request):
             form5 = log_form()
             if form5.is_valid():
                 log.objects.all().delete()
+                datos=form5.cleaned_data
 
                 form5.save()
                 mensaje5 = 'Ajustes corregidos exitosamente'
@@ -301,6 +304,7 @@ def api_view(request):
             form6 = scheduler_form()
             if form6.is_valid():
                 scheduler.objects.all().delete()
+                datos=form6.cleaned_data
 
                 form6.save()
                 mensaje6 = 'Ajustes corregidos exitosamente'
@@ -311,6 +315,7 @@ def api_view(request):
             form7 = slicin_form()
             if form7.is_valid():
                 slicin.objects.all().delete()
+                datos=form7.cleaned_data
 
                 form7.save()
                 mensaje7 = 'Ajustes corregidos exitosamente'
@@ -321,6 +326,7 @@ def api_view(request):
             form8 = embms_form()
             if form8.is_valid():
                 embms.objects.all().delete()
+                datos=form8.cleaned_data
 
                 form8.save()
                 mensaje8 = 'Ajustes corregidos exitosamente'
@@ -331,6 +337,7 @@ def api_view(request):
             form9 = channel_dl_form()
             if form9.is_valid():
                 channel_dl.objects.all().delete()
+                datos=form9.cleaned_data
 
                 form9.save()
                 mensaje9 = 'Ajustes corregidos exitosamente'
@@ -341,6 +348,7 @@ def api_view(request):
             form10 = cfr_form()
             if form10.is_valid():
                 cfr.objects.all().delete()
+                datos=form10.cleaned_data
 
                 form10.save()
                 mensaje10 = 'Ajustes corregidos exitosamente'
@@ -351,6 +359,7 @@ def api_view(request):
             form11 = e2_agent_form()
             if form11.is_valid():
                 e2_agent.objects.all().delete()
+                datos=form11.cleaned_data
 
                 form11.save()
                 mensaje11 = 'Ajustes corregidos exitosamente'
@@ -361,6 +370,7 @@ def api_view(request):
             form12 = expert_form()
             if form12.is_valid():
                 expert.objects.all().delete()
+                datos=form12.cleaned_data
 
                 form12.save()
                 mensaje12 = 'Ajustes corregidos exitosamente' 
@@ -370,7 +380,8 @@ def api_view(request):
         elif 'submit_form13' in request.POST:
             form13 = channel_ul_form()
             if form13.is_valid():
-                expert.objects.all().delete()
+                channel_ul.objects.all().delete()
+                datos=form13.cleaned_data
 
                 form12.save()
                 mensaje13 = 'Ajustes corregidos exitosamente' 
@@ -379,7 +390,7 @@ def api_view(request):
 
     return render(request, 'api/principal.html', {
         'form1':form1, 'form2':form2, 'form3':form3, 'form4':form4,'form5':form5,'form6':form6,'form7':form7,
-        'form8':form8,'form10':form10,'form11':form11,'form12':form12,#'form13':form13, 'form9':form9
+        'form8':form8,'form10':form10,'form11':form11,'form12':form12,'form13':form13, 'form9':form9,
         'error1':error1, 'error2':error2, 'error3':error3,'error4':error4,'error5':error5,'error6':error6,'error7':error7,
         'error8':error8,'error9':error9,'error10':error10,'error11':error11,'error12':error12,'error13':error13,
         'mensaje1':mensaje1, 'mensaje2':mensaje2, 'mensaje3':mensaje3 , 'mensaje4': mensaje4,'mensaje5': mensaje5,

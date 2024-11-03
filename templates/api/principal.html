@@ -54,12 +54,13 @@
             </div>
                 <br>
                 <li class="nav-item">
-                    <a class="logout" href="{% url 'logout' %}" style="text-align: right;">Cerrar sección,{{user.username}}</a>
+                    <a class="logout" href="{% url 'logout' %}" style="text-align: right;">{{user.username}}</a>
                 </li>                
             </ul>
         </nav> 
                    
         <div class="col-md-9">  
+
             <section id="config1" class="content">                          
                 <div class="form-container cuadro-formulario">                    
                     <h2 class="form-title">Ajustes de eNB</h2>
@@ -214,33 +215,18 @@
                     <form method="post">                        
                         {% csrf_token %}
                         {{ form2.non_field_errors }}
-                        <div class="form-group">                            
-                            <label for="{{ form2.sib_config.id_for_label }}">{{ form2.sib_config.label }}</label>
-                            {{ form2.sib_config }}
-                            {% if form2.sib_config.errors %}
-                                <div class="mensaje-error">
-                                    {{ form2.sib_config.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">                            
-                            <label for="{{ form2.rr_config.id_for_label }}">{{ form2.rr_config.label }}</label>
-                            {{ form2.rr_config }}
-                            {% if form2.rr_config.errors %}
-                                <div class="mensaje-error">
-                                    {{ form2.rr_config.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="form-group">                            
-                            <label for="{{ form2.rb_config.id_for_label }}">{{ form2.rb_config.label }}</label>
-                            {{ form2.rb_config }}
-                            {% if form2.rb_config.errors %}
-                                <div class="mensaje-error">
-                                    {{ form2.rb_config.errors }}
-                                </div>
-                            {% endif %}
-                        </div>
+                        {% for field in form2 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        
                         <br>                        
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary" name="submit_form2">Guardar</button>
@@ -248,9 +234,10 @@
                     </form>
                 </div>
             </section>
+
             <section id="config3" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 3</h2>
+                    <h2 class="form-title">RF</h2>
                     <br>
                     {% if mensaje3 %}
                         <p class="mensaje-exito">
@@ -260,294 +247,327 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form3.non_field_errors }}
-                        <div class="form-group">
-                            <label for="input9">Campo 9</label>
-                            <input type="text" class="form-control" id="input5" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input10">Campo 10</label>
-                            <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input11">Campo 11</label>
-                            <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input12">Campo 12</label>
-                            <input type="text" class="form-control" id="input6" placeholder="Ingrese valor">
-                        </div>
+                        {% for field in form3 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary" name="submit_form3">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config4" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 4</h2>
+                    <h2 class="form-title">Pcap</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input13">Campo 13</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input14">Campo 14</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input15">Campo 15</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input16">Campo 16</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje4 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje4 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form4.non_field_errors }}
+                        {% for field in form4 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form4">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config5" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 5</h2>
+                    <h2 class="form-title">Log</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input17">Campo 17</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input18">Campo 18</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input19">Campo 19</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input20">Campo 20</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje5 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje5 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form5.non_field_errors }}
+                        {% for field in form5 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}                        
+
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form5">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config6" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 6</h2>
+                    <h2 class="form-title">Scheduler</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input21">Campo 21</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input22">Campo 22</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input23">Campo 23</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input24">Campo 24</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje6 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje6 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form6.non_field_errors }}
+                        {% for field in form6 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}                        
+
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form6">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config7" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 7</h2>
+                    <h2 class="form-title">Slicin</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input25">Campo 25</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input26">Campo 26</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input27">Campo 27</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input28">Campo 28</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje7 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje7 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form7 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form7">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config8" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 8</h2>
+                    <h2 class="form-title">EMBMS</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input29">Campo 29</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input30">Campo 30</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input31">Campo 31</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input32">Campo 32</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje8 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje8 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">  
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form8 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}                      
+
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form8">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config9" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 9</h2>
+                    <h2 class="form-title">Chanel dl</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input33">Campo 33</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input34">Campo 34</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input35">Campo 35</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input36">Campo 36</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje9 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje9 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">   
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form9 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}                     
+                           
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form9">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+            
             <section id="config10" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 10</h2>
+                    <h2 class="form-title">Cfr</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input37">Campo 37</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input38">Campo 38</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input39">Campo 39</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input40">Campo 40</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje10 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje10 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form10 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form10">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config11" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 11</h2>
+                    <h2 class="form-title">E2 Agent</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input41">Campo 41</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input42">Campo 42</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input43">Campo 43</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input44">Campo 44</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
+                    {% if mensaje11 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje11 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form11 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-primary" name="submit_form11">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config12" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 12</h2>
+                    <h2 class="form-title">Expert</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input45">Campo 45</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input46">Campo 46</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input47">Campo 47</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input48">Campo 48</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>                        
+                    {% if mensaje12 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje12 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form12 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}             
                         <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary" name="submit_form12">Guardar</button>
                         </div>
                     </form>
                 </div>
             </section>
+
             <section id="config13" class="content">                
                 <div class="form-container cuadro-formulario">
-                    <h2 class="form-title">Configuración 13</h2>
+                    <h2 class="form-title">Chanel UL</h2>
                     <br>
-                    <form>
-                        <div class="form-group">
-                            <label for="input45">Campo 45</label>
-                            <input type="text" class="form-control" id="input1" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input46">Campo 46</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input47">Campo 47</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>
-                        <div class="form-group">
-                            <label for="input48">Campo 48</label>
-                            <input type="text" class="form-control" id="input2" placeholder="Ingrese valor">
-                        </div>                        
+                    {% if mensaje13 %}
+                        <p class="mensaje-exito">
+                            {{ mensaje13 }}
+                        </p>
+                    {% endif %}
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form7.non_field_errors }}
+                        {% for field in form13 %}
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="mensaje-error">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                                               
                         <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary" name="submit_form13">Guardar</button>
                         </div>
                     </form>
                 </div>
