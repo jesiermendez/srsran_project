@@ -27,3 +27,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showSection(activeSection);
 });
+
+function toggleMenu() {
+    const menu = document.getElementById('opcionesMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+// Cierra el menú si se hace clic fuera de él
+window.onclick = function(event) {
+    if (!event.target.matches('.boton')) {
+        const menu = document.getElementById('opcionesMenu');
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+        }
+    }
+}

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -33,7 +33,7 @@ class srsranModelViewSet(viewsets.ModelViewSet):
     queryset = enodeb.objects.all()
     serializer_class = enodeb_serializer
 
-@login_required
+
 def api_view(request):
     mensaje1 = ''
     mensaje2 = ''
@@ -229,165 +229,167 @@ def api_view(request):
     form12 = expert_form(initial=initial_data_expert)
 
 
-    if request.method == 'POST':
-        if 'submit_form1' in request.POST:
-            form1 = enodeb_form(request.POST)
-            if form1.is_valid():                
-                form_unsaved = form1.save(commit=False)
-                id_enb = form_unsaved.enb_id
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if 'submit_form1' in request.POST:
+                form1 = enodeb_form(request.POST)
+                if form1.is_valid():                
+                    form_unsaved = form1.save(commit=False)
+                    id_enb = form_unsaved.enb_id
 
-                ex = convertir_a_hexadecimal(id_enb)
-                if ex != -1:
-                    enodeb.objects.all().delete()
-                    form_unsaved.enb_id = ex
-                    datos = form_unsaved.cleaned_data
+                    ex = convertir_a_hexadecimal(id_enb)
+                    if ex != -1:
+                        enodeb.objects.all().delete()
+                        form_unsaved.enb_id = ex
+                        datos = form_unsaved.cleaned_data
 
-                    results = modificar_enodeb(enb_id=ex, name= datos['name'], mcc= datos['mcc'], mnc=datos['mnc'], 
+                        results = modificar_enodeb(enb_id=ex, name= datos['name'], mcc= datos['mcc'], mnc=datos['mnc'], 
                                                mme_addr=datos['mme_addr'],gtp_bind_addr=datos['gtp_bind_addr'],
                                                gtp_advertise_addr=datos['gtp_advertise_addr'], s1c_bind_addr=datos['s1c_bind_addr'], s1c_bind_port=datos['s1c_bind_port'],n_prb=datos['n_prb'],
                                                nof_ports=datos['nof_ports'],tm=datos['tm'], p_a=datos['p_a'])
 
-                    form_unsaved.save()
+                        form_unsaved.save()
                                   
-                    mensaje1 = 'Ajustes corregidos exitosamente'
-                else:
-                    error1 = 'El id excede los 20 bits'
+                        mensaje1 = 'Ajustes corregidos exitosamente'
+                    else:
+                        error1 = 'El id excede los 20 bits'
                 
               
-        elif 'submit_form2' in request.POST:
-            form2 = enb_files_form(request.POST)
-            if form2.is_valid():
-                enb_files.objects.all().delete()
-                datos=form2.cleaned_data
+            elif 'submit_form2' in request.POST:
+                form2 = enb_files_form(request.POST)
+                if form2.is_valid():
+                    enb_files.objects.all().delete()
+                    datos=form2.cleaned_data
                 
-                resultado = modificar_enb_files(sib_config=datos['sib_config'],rr_config= datos['rr_config'],rb_config= datos['rb_config'],)
+                    resultado = modificar_enb_files(sib_config=datos['sib_config'],rr_config= datos['rr_config'],rb_config= datos['rb_config'])
                 
-                form2.save()
-                mensaje2 = 'Ajustes corregidos exitosamente'
-            else:
-                error2 = 'Error al guardar formulario'
+                    form2.save()
+                    mensaje2 = 'Ajustes corregidos exitosamente'
+                else:
+                    error2 = 'Error al guardar formulario'
         
-        elif 'submit_form3' in request.POST:
-            form3 = rf_form()
-            if form3.is_valid():
-                rf.objects.all().delete()
-                datos=form3.cleaned_data
+            elif 'submit_form3' in request.POST:
+                form3 = rf_form()
+                if form3.is_valid():
+                    rf.objects.all().delete()
+                    datos=form3.cleaned_data
 
-                form3.save()
-                mensaje3 = 'Ajustes corregidos exitosamente'
-            else:
-                error3 = 'Error al guardar formulario'
+                    form3.save()
+                    mensaje3 = 'Ajustes corregidos exitosamente'
+                else:
+                    error3 = 'Error al guardar formulario'
 
-        elif 'submit_form4' in request.POST:
-            form4 = pcap_form()
-            if form4.is_valid():
-                pcap.objects.all().delete()
-                datos=form4.cleaned_data
+            elif 'submit_form4' in request.POST:
+                form4 = pcap_form()
+                if form4.is_valid():
+                    pcap.objects.all().delete()
+                    datos=form4.cleaned_data
 
-                form4.save()
-                mensaje4 = 'Ajustes corregidos exitosamente'
-            else:
-                error4 = 'Error al guardar formulario'
+                    form4.save()
+                    mensaje4 = 'Ajustes corregidos exitosamente'
+                else:
+                    error4 = 'Error al guardar formulario'
 
-        elif 'submit_form5' in request.POST:
-            form5 = log_form()
-            if form5.is_valid():
-                log.objects.all().delete()
-                datos=form5.cleaned_data
+            elif 'submit_form5' in request.POST:
+                form5 = log_form()
+                if form5.is_valid():
+                    log.objects.all().delete()
+                    datos=form5.cleaned_data
 
-                form5.save()
-                mensaje5 = 'Ajustes corregidos exitosamente'
-            else:
-                error5 = 'Error al guardar formulario'
+                    form5.save()
+                    mensaje5 = 'Ajustes corregidos exitosamente'
+                else:
+                    error5 = 'Error al guardar formulario'
 
-        elif 'submit_form6' in request.POST:
-            form6 = scheduler_form()
-            if form6.is_valid():
-                scheduler.objects.all().delete()
-                datos=form6.cleaned_data
+            elif 'submit_form6' in request.POST:
+                form6 = scheduler_form()
+                if form6.is_valid():
+                    scheduler.objects.all().delete()
+                    datos=form6.cleaned_data
 
-                form6.save()
-                mensaje6 = 'Ajustes corregidos exitosamente'
-            else:
-                error6 = 'Error al guardar formulario'
+                    form6.save()
+                    mensaje6 = 'Ajustes corregidos exitosamente'
+                else:
+                    error6 = 'Error al guardar formulario'
 
-        elif 'submit_form7' in request.POST:
-            form7 = slicin_form()
-            if form7.is_valid():
-                slicin.objects.all().delete()
-                datos=form7.cleaned_data
+            elif 'submit_form7' in request.POST:
+                form7 = slicin_form()
+                if form7.is_valid():
+                    slicin.objects.all().delete()
+                    datos=form7.cleaned_data
 
-                form7.save()
-                mensaje7 = 'Ajustes corregidos exitosamente'
-            else:
-                error7 = 'Error al guardar formulario'
+                    form7.save()
+                    mensaje7 = 'Ajustes corregidos exitosamente'
+                else:
+                    error7 = 'Error al guardar formulario'
 
-        elif 'submit_form8' in request.POST:
-            form8 = embms_form()
-            if form8.is_valid():
-                embms.objects.all().delete()
-                datos=form8.cleaned_data
+            elif 'submit_form8' in request.POST:
+                form8 = embms_form()
+                if form8.is_valid():
+                    embms.objects.all().delete()
+                    datos=form8.cleaned_data
 
-                form8.save()
-                mensaje8 = 'Ajustes corregidos exitosamente'
-            else:
-                error8 = 'Error al guardar formulario'
+                    form8.save()
+                    mensaje8 = 'Ajustes corregidos exitosamente'
+                else:
+                    error8 = 'Error al guardar formulario'
 
-        elif 'submit_form9' in request.POST:
-            form9 = channel_dl_form()
-            if form9.is_valid():
-                channel_dl.objects.all().delete()
-                datos=form9.cleaned_data
+            elif 'submit_form9' in request.POST:
+                form9 = channel_dl_form()
+                if form9.is_valid():
+                    channel_dl.objects.all().delete()
+                    datos=form9.cleaned_data
 
-                form9.save()
-                mensaje9 = 'Ajustes corregidos exitosamente'
-            else:
-                error9 = 'Error al guardar formulario'
+                    form9.save()
+                    mensaje9 = 'Ajustes corregidos exitosamente'
+                else:
+                    error9 = 'Error al guardar formulario'
 
-        elif 'submit_form10' in request.POST:
-            form10 = cfr_form()
-            if form10.is_valid():
-                cfr.objects.all().delete()
-                datos=form10.cleaned_data
+            elif 'submit_form10' in request.POST:
+                form10 = cfr_form()
+                if form10.is_valid():
+                    cfr.objects.all().delete()
+                    datos=form10.cleaned_data
 
-                form10.save()
-                mensaje10 = 'Ajustes corregidos exitosamente'
-            else:
-                error10 = 'Error al guardar formulario'
+                    form10.save()
+                    mensaje10 = 'Ajustes corregidos exitosamente'
+                else:
+                    error10 = 'Error al guardar formulario'
 
-        elif 'submit_form11' in request.POST:
-            form11 = e2_agent_form()
-            if form11.is_valid():
-                e2_agent.objects.all().delete()
-                datos=form11.cleaned_data
+            elif 'submit_form11' in request.POST:
+                form11 = e2_agent_form()
+                if form11.is_valid():
+                    e2_agent.objects.all().delete()
+                    datos=form11.cleaned_data
 
-                form11.save()
-                mensaje11 = 'Ajustes corregidos exitosamente'
-            else:
-                error11 = 'Error al guardar formulario'
+                    form11.save()
+                    mensaje11 = 'Ajustes corregidos exitosamente'
+                else:
+                    error11 = 'Error al guardar formulario'
 
-        elif 'submit_form12' in request.POST:
-            form12 = expert_form()
-            if form12.is_valid():
-                expert.objects.all().delete()
-                datos=form12.cleaned_data
+            elif 'submit_form12' in request.POST:
+                form12 = expert_form()
+                if form12.is_valid():
+                    expert.objects.all().delete()
+                    datos=form12.cleaned_data
 
-                form12.save()
-                mensaje12 = 'Ajustes corregidos exitosamente' 
-            else:
-                error12 = 'Error al guardar formulario'               
+                    form12.save()
+                    mensaje12 = 'Ajustes corregidos exitosamente' 
+                else:
+                    error12 = 'Error al guardar formulario'               
         
-        elif 'submit_form13' in request.POST:
-            form13 = channel_ul_form()
-            if form13.is_valid():
-                channel_ul.objects.all().delete()
-                datos=form13.cleaned_data
+            elif 'submit_form13' in request.POST:
+                form13 = channel_ul_form()
+                if form13.is_valid():
+                    channel_ul.objects.all().delete()
+                    datos=form13.cleaned_data
 
-                form12.save()
-                mensaje13 = 'Ajustes corregidos exitosamente' 
-            else:
-                error13 = 'Error al guardar formulario'
-
+                    form12.save()
+                    mensaje13 = 'Ajustes corregidos exitosamente' 
+                else:
+                    error13 = 'Error al guardar formulario'
+    else:
+        return redirect('login')
     return render(request, 'api/principal.html', {
         'form1':form1, 'form2':form2, 'form3':form3, 'form4':form4,'form5':form5,'form6':form6,'form7':form7,
         'form8':form8,'form10':form10,'form11':form11,'form12':form12,'form13':form13, 'form9':form9,

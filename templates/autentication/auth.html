@@ -31,9 +31,9 @@ body, html {
                 {% csrf_token %}
                 <div >
                     {{ form.as_p }}
-                    {% if form1.errors %}
+                    {% if form.errors %}
                         <div class="mensaje-error">
-                            {{ form1.errors }}
+                            {{ form.errors }}
                         </div>
                     {% endif %}
                 </div>                

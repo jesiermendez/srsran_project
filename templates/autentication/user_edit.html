@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit{% endblock %}
+
+{% block content %}
+
+<header class="bg-estilo text-center py-3">
+    <h1 class="form-title1">Registro de Usuarios</h1>
+</header>
+
+<main>
+    <div class="form-container cuadro-formulario">
+        <h2 class="form-title">Editar usuario</h2>
+        <br>
+        {% if mensaje %}
+            <p class="mensaje-exito">
+                {{ mensaje }}
+            </p>
+        {% endif %}
+        <form method="post">  
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="mensaje-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div style="display: flex;">
+            <div>
+                <a class="opcion" href="{% url 'register' %}">Cancelar</a>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+            </div>
+        </form>
+        <hr>
+        <h2>Informacion del perfil</h2>
+        <p>Username: {{user1.username}}</p>
+        <p>Nombre: {{user1.first_name}}</p>
+        <p>Apellidos: {{user1.email}}</p>
+        <p>Telefono: {{user1.phone}}</p>
+        {% if user1.picture %}
+        <p>Imagen:</p>
+        <img src="{{user1.picture.url}}" alt="Imagen" style="max-width: 200px;">
+        {% else %}
+            <p>Sin foto</p>
+        {% endif %}
+    </div>
+
+</main>
+
+{% endblock %}

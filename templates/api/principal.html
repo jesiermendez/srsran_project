@@ -12,6 +12,15 @@
         <nav class="col-md-3 cuadro">
             <ul class="nav flex-column nav-pills" id="configMenu">
                 <div>
+                    
+                <li class="boton-container">
+                    <button class="boton" onclick="toggleMenu()">{{user.username}}</button>
+                    <div class="opciones" id="opcionesMenu">
+                        <a href="{% url 'logout' %}" class="opcion">Cerrar Sesión</a>
+                        <a href="{% url 'register' %}" class="opcion">Acceder al Menú</a>
+                    </div>
+                </li> 
+                <hr>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-target="#config1">eNB</a>
                 </li>
@@ -52,10 +61,7 @@
                     <a class="nav-link" href="#" data-target="#config12">Expert</a>
                 </li>
             </div>
-                <br>
-                <li class="nav-item">
-                    <a class="logout" href="{% url 'logout' %}" style="text-align: right;">{{user.username}}</a>
-                </li>                
+                             
             </ul>
         </nav> 
                    
@@ -401,7 +407,7 @@
                     {% endif %}
                     <form method="post">  
                         {% csrf_token %}
-                        {{ form7.non_field_errors }}
+                        {{ form8.non_field_errors }}
                         {% for field in form8 %}
                             <div class="form-group">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>

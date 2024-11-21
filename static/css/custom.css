@@ -181,7 +181,52 @@ nav {
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    position: relative;
+    position: static;
     width: 100%;
     bottom: 0;
+}
+.boton-container {
+    position: relative;    
+    display: inline-block;
+    padding: 10px 20px;
+    
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.boton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100px;
+}
+
+.opciones {
+    position: absolute;
+    top: 100%; /* Coloca las opciones debajo del botón */
+    left: 0;
+    width: 100%;
+    display: none; /* Oculta las opciones por defecto */
+    z-index: 1; /* Asegura que las opciones se muestren encima */
+    bottom: 100%;
+    border: 1px solid #ccc; /* Borde para las opciones */
+}
+
+.opcion {
+    color: black;
+    padding: 10px;
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    display: block; /* Hace que las opciones ocupen toda la línea */
+
+    background-color: #7d97b3;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.opcion:hover {
+    background-color: #f44336; /* Color de fondo al pasar el puntero */
+    color: white; /* Color del texto al pasar el puntero */
 }
